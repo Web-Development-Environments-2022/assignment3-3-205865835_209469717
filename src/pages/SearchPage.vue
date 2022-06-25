@@ -5,7 +5,7 @@
     <h1 class="title">Search Page</h1>
     <!-- <SearchBar title="searchBar" class="search-bar" />     -->
     <b-form-group >
-        <b-form-input v-on:keyup.enter="search"  v-model="searchQuery" class="search-field" placeholder="Search Recipes" ></b-form-input>
+        <b-form-input v-on:keyup.enter="search"  v-model="searchQuery" class="search-field" :placeholder="this.lastSearched" ></b-form-input>
         <!-- <b-button type="submit" class="search-button"  variant="success"> search<img src="@/assets/search.png"></b-button> -->
         <img img src="@/assets/search.png" class="search-image">
     </b-form-group>
@@ -20,7 +20,7 @@
       disabled-field="notEnabled"
     ></b-form-select>
 
-    <b>cuisine:</b>
+    <b>Cuisine:</b>
     <b-form-select    
       v-model="cuisineSelected"
       :options="cuisineOptions"
@@ -30,7 +30,7 @@
       disabled-field="notEnabled"
     ></b-form-select>
     
-    <b>diet:</b>
+    <b>Diet:</b>
     <b-form-select    
       v-model="dietSelected"
       :options="dietOptions"
@@ -40,7 +40,7 @@
       disabled-field="notEnabled"
     ></b-form-select>
     
-    <b>intolerance:</b>
+    <b>Intolerance:</b>
     <b-form-select    
       v-model="intoleranceSelected"
       :options="intoleranceOptions"
@@ -49,28 +49,37 @@
       text-field="name"
       disabled-field="notEnabled"
     ></b-form-select>
-    
-    <div>
-        <RecipePreview class="recipePreview" v-bind:id="635350" title="Blue Cheese Burgers" readyInMinutes=45 image="https://spoonacular.com/recipeImages/635350-312x231.jpg" aggregateLikes=7 v-bind:vegan="true" v-bind:vegetarian="true" v-bind:glutenFree="true"/>      
-        <RecipePreview class="recipePreview" v-bind:id="635350" title="Blue Cheese Burgers" readyInMinutes=45 image="https://spoonacular.com/recipeImages/635350-312x231.jpg" aggregateLikes=7 v-bind:vegan="true" v-bind:vegetarian="true" v-bind:glutenFree="true"/>      
-        <RecipePreview class="recipePreview" v-bind:id="635350" title="Blue Cheese Burgers" readyInMinutes=45 image="https://spoonacular.com/recipeImages/635350-312x231.jpg" aggregateLikes=7 v-bind:vegan="true" v-bind:vegetarian="true" v-bind:glutenFree="true"/>      
-        <RecipePreview class="recipePreview" v-bind:id="635350" title="Blue Cheese Burgers" readyInMinutes=45 image="https://spoonacular.com/recipeImages/635350-312x231.jpg" aggregateLikes=7 v-bind:vegan="true" v-bind:vegetarian="true" v-bind:glutenFree="true"/>      
-        <RecipePreview class="recipePreview" v-bind:id="635350" title="Blue Cheese Burgers" readyInMinutes=45 image="https://spoonacular.com/recipeImages/635350-312x231.jpg" aggregateLikes=7 v-bind:vegan="true" v-bind:vegetarian="true" v-bind:glutenFree="true"/>      
+    <br>
+    <b>Sort results by:</b>
+    <b-form-select    
+      v-on:change="changeSort"
+      v-model="sortSelected"
+      :options="sortOptions"
+      class="search-intolerance"
+      value-field="item"
+      text-field="name"
+      disabled-field="notEnabled"
+    ></b-form-select> 
+
+    <div v-if="this.recipesFound">
+      <RecipePreview v-for="r in this.recipes" :key="r.id" class="recipePreview" v-bind:id="r.id" v-bind:title="r.title" v-bind:readyInMinutes="r.readyInMinutes" v-bind:image="r.image" v-bind:aggregateLikes="r.aggregateLikes" v-bind:vegan="r.vegan" v-bind:vegetarian="r.vegetarian" v-bind:glutenFree="r.glutenFree"/>    
+    </div>
+    <div v-else>
+      <h1> No recipes found</h1>
     </div>
     
+
+
   </div>
 
 
 </template>
 
 <script>
-// import SearchBar from "../components/SearchBar";
-// export default {
-//   components: {
-//     SearchBar
-//   }
 import { METHODS } from 'http'
 
+
+// npm install --save v-autosuggest
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -82,11 +91,13 @@ import RecipePreview from "../components/RecipePreview";
 export default {
   name: "SearchPage",
   components: {
-    // RecipePreviewList
     RecipePreview
   },
   data() {
     return {
+      recipes: [],
+      recipesFound: true,
+      lastSearched: "Search recipes",
       searchQuery: '',
       amountSelected: '5',
       amountOptions: [
@@ -138,6 +149,11 @@ export default {
         { item: 'Low FODMAP', name: 'Low FODMAP' },
         { item: 'Whole30', name: 'Whole30' }          
       ],
+      sortSelected: 'Popularity',
+      sortOptions: [
+        { item: 'Popularity', name: 'Popularity' },
+        { item: 'Prep-time', name: 'Prep-time' }          
+      ],
       intoleranceSelected: 'No Intolerances',
       intoleranceOptions: [
         { item: 'No Intolerances', name: 'No Intolerances' },
@@ -156,43 +172,71 @@ export default {
       ]
     }
   },
-  // mounted(){
-  //   this.search();
-  // },
+  mounted(){
+    if (localStorage.getItem('lastSearch')){
+      this.lastSearched = localStorage.getItem('lastSearch');
+    } 
+  },
   methods:{
     async search(){
       var that = this;
-      var cuisine_ = ' ';
+      localStorage.setItem('lastSearch', that.searchQuery);
+      this.lastSearched = localStorage.getItem('lastSearch');
+      var cuisine_ = '_';
       if (that.cuisineSelected != "All Cuisines"){
         cuisine_ = that.cuisineSelected;
       }
-      var diet_ = ' ';
+      var diet_ = '_';
       if (that.dietSelected != "All Diets"){
         diet_ = that.dietSelected;
       }
-      var intolerance_ = ' ';
+      var intolerance_ = '_';
       if (that.intoleranceSelected != "No Intolerances"){
         intolerance_ = that.intoleranceSelected;
       }
       try{
         const response = await this.axios.get(
-          "http://localhost:80/recipes/search" + "/" + that.searchQuery + "/" + that.amountSelected,
+          "http://localhost:80/recipes/search" + "/" + that.searchQuery + "/" + that.amountSelected + "/" + cuisine_ + "/" + diet_ + "/" + intolerance_,
+          // this.$root.store.server_domain + "/recipes/search" + "/" + that.searchQuery + "/" + that.amountSelected + "/" + cuisine_ + "/" + diet_ + "/" + intolerance_,
           {
-            params:{
-              cuisine: cuisine_,
-              diet: diet_,
-              intolerance: intolerance_,
-            },
+            params:{},
           }
         );
         const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
+
+        if (this.recipes.length == 0){
+          this.recipesFound = false;
+        }
+        else{
+          if (that.sortSelected == "Popularity"){
+          this.recipes.sort(function(a, b) {return parseFloat(a.aggregateLikes) - parseFloat(b.aggregateLikes);});
+          this.recipes.reverse();
+          }
+          else{
+            this.recipes.sort(function(a, b) {return parseFloat(a.readyInMinutes) - parseFloat(b.readyInMinutes);});
+          }
+        }
+        
+
+        
+
         console.log(response);
       }
       catch(error){
         console.log(error);
       } 
+    },
+    async changeSort(){
+      var that = this;
+      if (that.sortSelected == "Popularity"){
+        this.recipes.sort(function(a, b) {return parseFloat(a.aggregateLikes) - parseFloat(b.aggregateLikes);});
+        this.recipes.reverse();
+      }
+      else{
+        this.recipes.sort(function(a, b) {return parseFloat(a.readyInMinutes) - parseFloat(b.readyInMinutes);});
+      }
     }
   }
 }
@@ -201,10 +245,16 @@ export default {
 
 <style>
 
+
 .recipePreview{
   display: inline-block;
-  margin-right: 50px;
+  margin: 12.5px;
+  border: 3px solid rgb(232, 232, 232);
+  border-radius: 10%;
 }
+
+
+
 .search-field {
   width: 70%;
   padding: 10px 35px 10px 15px;
