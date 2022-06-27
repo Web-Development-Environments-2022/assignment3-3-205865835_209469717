@@ -26,6 +26,41 @@
       </b-form-group>
 
       <b-form-group
+        id="input-group-firstName"
+        label-cols-sm="3"
+        label="First Name:"
+        label-for="firstName"
+      >
+        <b-form-input
+          id="firstName"
+          v-model="$v.form.firstName.$model"
+          type="text"
+          :state="validateState('firstName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.required">
+          First Name is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-lastName"
+        label-cols-sm="3"
+        label="Last Name:"
+        label-for="lastName"
+      >
+        <b-form-input
+          id="lastName"
+          v-model="$v.form.lastName.$model"
+          type="text"
+          :state="validateState('lastName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.required">
+          Last Name is required
+        </b-form-invalid-feedback>
+
+      </b-form-group>
+
+      <b-form-group
         id="input-group-country"
         label-cols-sm="3"
         label="Country:"
@@ -70,10 +105,11 @@
 
       <b-form-group
         id="input-group-confirmedPassword"
-        label-cols-sm="3"
-        label="Confirm Password:"
+        label-cols-sm="5"
+        label="Password Confirm:"
         label-for="confirmedPassword"
       >
+      <!-- <span> Confirm Password: </span> -->
         <b-form-input
           id="confirmedPassword"
           type="password"
@@ -90,7 +126,30 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-form-group
+        id="input-group-email_address"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email_address"
+      >
+        <b-form-input
+          id="email_address"
+          v-model="$v.form.email_address.$model"
+          :state="validateState('email_address')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.required">
+          Email is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-else-if="!$v.form.email_address.email_form">
+          Email form is invalid.
+          Example: email@example.com
+        </b-form-invalid-feedback>
+        
+      </b-form-group>
+
+      <p v-html="testData"></p>
+    
+
       <b-button
         type="submit"
         variant="primary"
@@ -98,6 +157,8 @@
         class="ml-5 w-75"
         >Register</b-button
       >
+      <b-button type="reset" variant="danger">Reset</b-button>
+
       <div class="mt-2">
         You have an account already?
         <router-link to="login"> Log in here</router-link>
@@ -141,7 +202,7 @@ export default {
         country: null,
         password: "",
         confirmedPassword: "",
-        email: "",
+        email_address: "",
         submitError: undefined
       },
       countries: [{ value: null, text: "", disabled: true }],
@@ -156,6 +217,12 @@ export default {
         length: (u) => minLength(3)(u) && maxLength(8)(u),
         alpha
       },
+      firstName: {
+        required,
+      },
+      lastName: {
+        required
+     },
       country: {
         required
       },
@@ -166,6 +233,10 @@ export default {
       confirmedPassword: {
         required,
         sameAsPassword: sameAs("password")
+      },
+      email_address: {
+        required,
+        email_form: email
       }
     }
   },
@@ -196,6 +267,7 @@ export default {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
       }
+      alert("Success")
     },
     onRegister() {
       // console.log("register method called");
@@ -214,7 +286,7 @@ export default {
         country: null,
         password: "",
         confirmedPassword: "",
-        email: ""
+        email_address: ""
       };
       this.$nextTick(() => {
         this.$v.$reset();
