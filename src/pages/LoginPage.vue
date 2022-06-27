@@ -1,7 +1,7 @@
 <template>
 
-  <div class="container">
-    <h1 class="title">Login</h1>
+  <div class="container" style="margin-top:100px;">
+    <h1 class="title">Sign  in</h1>
     <b-form @submit.prevent="onLogin">
       <b-form-group
         id="input-group-Username"
@@ -10,13 +10,14 @@
         label-for="Username"
       >
         <b-form-input
+          class="inputs"
           id="Username"
           v-model="$v.form.username.$model"
           type="text"
           :state="validateState('username')"
         ></b-form-input>
         <b-form-invalid-feedback>
-          Username is required
+          Username is required  
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -27,6 +28,7 @@
         label-for="Password"
       >
         <b-form-input
+          class="inputs"
           id="Password"
           type="password"
           v-model="$v.form.password.$model"
@@ -45,8 +47,8 @@
         >Login</b-button
       >
       <div class="mt-2">
-        Do not have an account yet?
-        <router-link to="register"> Register in here</router-link>
+        New to the website?
+        <router-link to="register"> Create an account</router-link>
       </div>
     </b-form>
     <b-alert
@@ -132,6 +134,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.title{
+  margin-bottom:60px;
+  margin-left:100px;
+  font-family: Georgia, serif;
+
+}
+.inputs{
+  margin-bottom:50px;
+}
 .container {
   max-width: 400px;
 }
