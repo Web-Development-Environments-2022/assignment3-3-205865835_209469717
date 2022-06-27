@@ -79,15 +79,6 @@ export default {
           }
         );
     },
-    // async addToHistory(){
-    //   this.watched = true;
-    //   const response = await this.axios.post(
-    //       "http://localhost:80/user/history" ,
-    //       {
-    //         recipe_id: this.id
-    //       }
-    //     );
-    // }
   },
 };
 </script>

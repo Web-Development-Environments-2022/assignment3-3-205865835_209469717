@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
       <router-link :to="{ name: 'search' }">Search</router-link>|
+      <router-link :to="{ name: 'family' }">Family Recipes</router-link>|
       <!-- {{ !$root.store.id }} -->
       <span v-if="!$root.store.username">
         Guest:
@@ -50,6 +51,7 @@ export default {
 
 #nav {
   padding: 30px;
+  background-color: #edddba;
 }
 
 #nav a {
@@ -58,6 +60,6 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #a62501;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title-text">Favorites</h1>
-    <RecipePreview v-for="r in this.recipes" :key="r.data.id" class="recipePreview" v-bind:id="r.data.id" v-bind:title="r.data.title" v-bind:readyInMinutes="r.data.readyInMinutes" v-bind:image="r.data.image" v-bind:aggregateLikes="r.data.aggregateLikes" v-bind:vegan="r.data.vegan" v-bind:vegetarian="r.data.vegetarian" v-bind:glutenFree="r.data.glutenFree"/>    
+    <RecipePreview v-for="r in this.recipes" :key="r.data.id" class="recipePreview" v-bind:id="r.data.id" v-bind:title="r.data.title" v-bind:readyInMinutes="r.data.readyInMinutes" v-bind:image="r.data.image" v-bind:aggregateLikes="r.data.popularity" v-bind:vegan="r.data.vegan" v-bind:vegetarian="r.data.vegetarian" v-bind:glutenFree="r.data.glutenFree"/>    
 
 
   </div>
@@ -17,7 +17,7 @@
 import RecipePreview from "../components/RecipePreview";
 
 export default {
-  name: "SearchPage",
+  name: "UserFavorites",
   components: {
     RecipePreview
   },

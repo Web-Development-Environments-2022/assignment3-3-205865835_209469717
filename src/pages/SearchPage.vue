@@ -210,6 +210,7 @@ export default {
           this.recipesFound = false;
         }
         else{
+          this.recipesFound = true;
           if (that.sortSelected == "Popularity"){
           this.recipes.sort(function(a, b) {return parseFloat(a.aggregateLikes) - parseFloat(b.aggregateLikes);});
           this.recipes.reverse();
@@ -249,7 +250,7 @@ export default {
 .recipePreview{
   display: inline-block;
   margin: 12.5px;
-  border: 3px solid rgb(232, 232, 232);
+  border: 3px solid rgb(230, 230, 226);
   border-radius: 10%;
 }
 
