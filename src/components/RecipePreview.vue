@@ -142,7 +142,8 @@ export default {
 <style scoped>
 
 .all-details{
-  width: 25.7%;
+  width: 30%;
+  vertical-align: top;
   
 }
 .recipe-body {

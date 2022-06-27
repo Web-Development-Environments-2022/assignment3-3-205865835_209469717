@@ -40,8 +40,6 @@
     <div class="Random_Recipes">
       <div v-if = !$root.store.username>
         <RandomRecipe/>
-        
-        
       </div>
 
       <div v-else>
