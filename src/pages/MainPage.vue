@@ -1,31 +1,47 @@
 <template>
   <div class="container">
-    <h1 class="title">Welcome to our recipes website!</h1>
-    <!-- <RecipePreviewList title="Randome Recipes" class="RandomRecipes center" /> -->
-    <!-- <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to view this</router-link> -->
+
+
+  <div class="text">
+    <span>W</span>
+    <span>E</span>
+    <span>L</span>
+    <span>C</span>
+    <span>O</span>
+    <span>M</span>
+    <span>E</span>
+    <span></span>
+    <span>T</span>
+    <span>O</span>
+    <span></span>
+    <span>O</span>
+    <span>U</span>
+    <span>R</span>
+    <span></span>
+    <span>R</span>
+    <span>E</span>
+    <span>C</span>
+    <span>I</span>
+    <span>P</span>
+    <span>E</span>
+    <span></span>
+    <span>S</span>
+    <span>I</span>
+    <span>T</span>
+    <span>E</span>
+  </div>
     <div class="main_page">
     
+
+    <div class="Mainpage_login">
+    <Login/>
+    </div>  
+
     <div class="Random_Recipes">
       <div v-if = !$root.store.username>
-        <!-- <RecipePreviewList
-          title="Last Viewed Recipes"
-          :class="{
-            RandomRecipes: true,
-            // blur: !$root.store.username,
-            // center: true
-            //''disabled'' after the }
-          }"
+        <RandomRecipe/>
         
-                  
-        ></RecipePreviewList> -->
-        <RandomRecipe>
-
-        </RandomRecipe>
         
-        <!-- <div><img class=image-fit src="https://www.simplyrecipes.com/thmb/OCi18J2V8OeKDFV3FxoeKvgq74E=/1423x1067/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2012__07__grilled-sweet-potatoes-horiz-a-1600-7c8292daa98e4020b447f0dc97a45cb7.jpg"></div>
-        <div><img class=image-fit src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=556,505"></div>
-        <div><img class=image-fit src="https://cdn.loveandlemons.com/wp-content/uploads/2020/03/pantry-recipes-2-500x500.jpg"></div> -->
-        <!-- <img class=image-fit src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=556,505"> -->
       </div>
 
       <div v-else>
@@ -34,25 +50,10 @@
       </div>
     </div>
 
-    <div class="Mainpage_login">
-    <Login
-      title="Login"
-      :class="{
-        
-      }"
-      disabled
-    ></Login>
-    </div>    
 
     </div>
 
 
-
-    <!-- <div
-      style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
-    >
-      Centeredasdasdad
-    </div> -->
   </div>
 </template>
 
@@ -73,9 +74,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.RandomRecipes {
-  margin: 10px 0 10px;
-}
+// .RandomRecipes {
+//   margin-right: 500px;
+// }
 .blur {
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
   filter: blur(2px);
@@ -93,16 +94,20 @@ export default {
 .Random_Recipes{
   // border:1px solid #000;
   display:inline-block;
-  width: 50%;
-  
+  width: 70%;
+  height: 0%;
+  vertical-align:top; /* here */
+  margin-bottom: 100px;
 }
 
 .Mainpage_login{
   // border:1px solid red;
   display:inline-block;
-  width: 50%;
-  margin-top: 100px;
+  width: 30%;
+  // margin-bottom: 100px;
+  line-height: 100%;
   vertical-align: top; /* here */
+  
 
 }
 .image-fit{
@@ -116,6 +121,50 @@ export default {
   // width: 300px; 
   // height: 337px; 
   // object-fit: contain;
+}
+
+
+.text {
+  display: flex;
+  justify-content: center;
+  margin-top: 15vh;
+  transform: translateY(-50%);
+  // margin: 250px auto;
+  text-align: center;
+  // border: 1px solid #000;
+  transition: transform .3s ease-in-out;
+  font-size: 26px;
+  
+  &:hover {
+    transform: rotateX(35deg), translateY(-50%);   
+    span {
+      color: #ccc;
+      &:nth-child(odd) {
+        transform: skewY(15deg);      
+        // background-color: #f00;
+        // box-shadow: 0 60px 20px rgba(0,0,0,0.1);
+      }
+      &:nth-child(even) {
+        transform: skewY(-15deg);      
+        background-color: #f9f9f9;
+        color: #a6a6a6;
+        // box-shadow: 0 60px 20px rgba(0,0,0,0.1);
+      }
+    }
+  }
+  
+  > span {
+    display: block;
+    background-color: #fff;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    transition: transform .3s ease-in-out, color .3s ease-in-out, background-color .3s ease-in-out;
+    box-shadow: 0 40px 50px rgba(0,0,0,0.1);
+    &:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+  }
 }
 
 </style>
