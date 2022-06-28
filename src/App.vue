@@ -66,7 +66,12 @@
               Family Recipes
             </router-link>
             </li>
-         </b-nav-item-dropdown>          
+         </b-nav-item-dropdown>         
+         <li class="nav-item" v-if="$root.store.username">            
+            <router-link :to="{ name: 'createRecipe' }" style="text-decoration: none;">
+              <a class="nav-link" href=""  >Create Rcipes</a>
+            </router-link>
+          </li> 
           <li class="nav-item" v-if="$root.store.username">            
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
             <a class="nav-link disabled"> Welcome {{ $root.store.username }} ! <span class="sr-only"></span></a>            

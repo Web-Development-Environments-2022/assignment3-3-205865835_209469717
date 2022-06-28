@@ -30,35 +30,37 @@
 
 export default {
   async mounted() {    
-
-    try{
+    if (this.$root.store.username){
+      try{
       this.history = await this.axios.get(
-    "http://localhost:80/user/history",
-    {
-      params:{},
-    }
-    );
-    this.favorites = await this.axios.get(
-      "http://localhost:80/user/favorites",
+      "http://localhost:80/user/history",
       {
         params:{},
       }
-    );
-    let history_ids = [];
-    for (let i = 0; i < this.history.data.length; i++) {
-      history_ids.push(this.history.data[i].recipe_id);
+      );
+      this.favorites = await this.axios.get(
+        "http://localhost:80/user/favorites",
+        {
+          params:{},
+        }
+      );
+      let history_ids = [];
+      for (let i = 0; i < this.history.data.length; i++) {
+        history_ids.push(this.history.data[i].recipe_id);
+      }
+      let favorites_ids = [];
+      for (let i = 0; i < this.favorites.data.length; i++) {
+        favorites_ids.push(this.favorites.data[i].recipe_id);
+      }
+      this.favorite = favorites_ids.includes(this.id);
+      this.watched = history_ids.includes(this.id);
+      }
+      catch(error){
+        this.favorite = false;
+        this.watched = false; 
+      }
     }
-    let favorites_ids = [];
-    for (let i = 0; i < this.favorites.data.length; i++) {
-      favorites_ids.push(this.favorites.data[i].recipe_id);
-    }
-    this.favorite = favorites_ids.includes(this.id);
-    this.watched = history_ids.includes(this.id);
-    }
-    catch(error){
-      this.favorite = false;
-      this.watched = false; 
-    }
+    
     
 
     // let history_ids = [];
