@@ -1,10 +1,9 @@
-<template>
+<template>  
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
       <router-link :to="{ name: 'search' }">Search</router-link>|
-      <router-link :to="{ name: 'family' }">Family Recipes</router-link>|
-      <!-- {{ !$root.store.id }} -->
+      <router-link :to="{ name: 'family' }">Family Recipes</router-link>|      
       <span v-if="!$root.store.username">
         Guest:
         <router-link :to="{ name: 'register' }">Register</router-link>|
@@ -14,7 +13,71 @@
         <router-link :to="{ name: 'favorites' }">favorites</router-link>|
         {{ $root.store.username }}: <button @click="Logout">Logout</button>|        
       </span>
-    </div>
+    </div> -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+      <router-link :to="{ name: 'main' }" style="text-decoration: none;">
+        <a class="navbar-brand" > DorAlon Recipes</a>
+      </router-link>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item">            
+            <router-link :to="{ name: 'search' }" style="text-decoration: none;">
+              <a class="nav-link" href=""  >Search Recipes</a>
+            </router-link>
+          </li>
+
+          <li class="nav-item">            
+            <router-link :to="{ name: 'about' }" style="text-decoration: none;">
+              <a class="nav-link" href=""  >About</a>
+            </router-link>
+          </li>
+
+          <li class="nav-item" v-if="!$root.store.username">            
+            <router-link :to="{ name: 'register' }" style="text-decoration: none;">
+              <a class="nav-link" href=""  >Register</a>
+            </router-link>
+          </li>
+          <li class="nav-item" v-if="!$root.store.username">            
+            <router-link :to="{ name: 'login' }" style="text-decoration: none;">
+              <a class="nav-link" href=""  >Login</a>
+            </router-link>
+          </li>          
+
+          <b-nav-item-dropdown v-if="$root.store.username" text="Personal Area" >
+           <li class="nav-item" >            
+            <router-link :to="{ name: 'favorites' }" style="text-decoration: none; color: black;">
+              Favorite Recipes
+            </router-link>
+           </li>
+           <div class="dropdown-divider"></div>
+            <li class="nav-item" >   
+            <router-link :to="{ name: 'userRecipes' }" style="text-decoration: none; color: black;">
+              My Recipes
+            </router-link>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item" >   
+            <router-link :to="{ name: 'family' }" style="text-decoration: none; color: black;">
+              Family Recipes
+            </router-link>
+            </li>
+         </b-nav-item-dropdown>          
+          <li class="nav-item" v-if="$root.store.username">            
+            <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
+            <a class="nav-link disabled"> Welcome {{ $root.store.username }} ! <span class="sr-only"></span></a>            
+          </li>   
+          <li class="nav-item" v-if="$root.store.username" style="margin-right: auto !important">            
+            <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
+            <a class="nav-link" href="#" @click="Logout"> Logout <span class="sr-only"></span></a>            
+          </li>   
+        </ul>
+      </div>
+    </nav>
     <router-view />
   </div>
 </template>
@@ -33,6 +96,9 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
+    },
+    routeRegister(){
+      this.router.push("./pages/RegisterPage");
     }
   }
 };
