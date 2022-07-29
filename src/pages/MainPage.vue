@@ -32,21 +32,29 @@
   </div>
     <div class="main_page">
     
+      
+    <div v-if = !$root.store.username>
+      <div class="Mainpage_login">
+        <Login/>
+      </div>  
 
-    <div class="Mainpage_login">
-    <Login/>
-    </div>  
-
-    <div class="Random_Recipes">
-      <div v-if = !$root.store.username>
-        <RandomRecipe/>
-      </div>
-
-      <div v-else>
-        Logged In
-        
+      <div class="Random_Recipes">
+          <RandomRecipe/>
       </div>
     </div>
+
+    <div class="After Login" v-else>
+      <p>Welcome to our site {{$root.store.username}} !</p>
+
+      <p>These are the latest 3 recipes you've viewed:</p>
+      <FavoriteHistory/>
+
+      
+      
+    </div>
+
+
+
 
 
     </div>
@@ -59,6 +67,7 @@
 // import RecipePreviewList from "../components/RecipePreviewList";
 import RandomRecipe from "../components/RandomRecipe";
 import Login from "./LoginPage";
+import FavoriteHistory from "../components/FavoriteHistory"
 export default {
   mounted(){
 
@@ -66,8 +75,11 @@ export default {
   components: {
     // RecipePreviewList,
     Login,
-    RandomRecipe
+    RandomRecipe,
+    FavoriteHistory,
+
   },
+  
 };
 </script>
 

@@ -113,7 +113,18 @@ export default {
         // this.$root.loggedIn = true;
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.$router.push("/");
+        var pathname = window.location.pathname;
+        switch(pathname) {
+          case "/" :
+              break;
+          default:
+            this.$router.push("/");
+              break;
+        }
+        
+        // if ($root.store.username){
+        // this.$router.push("/");
+        // }
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
@@ -130,18 +141,20 @@ export default {
 
       this.Login();
     }
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
 .title{
-  margin-bottom:60px;
+  // margin-bottom:60px;
   margin-left:100px;
   font-family: Georgia, serif;
 
 }
 .inputs{
   margin-bottom:50px;
+  vertical-align: top;
+  
 }
 .container {
   max-width: 400px;
