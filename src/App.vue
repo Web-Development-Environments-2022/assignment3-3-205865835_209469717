@@ -67,9 +67,11 @@
             </router-link>
             </li>
          </b-nav-item-dropdown>         
-         <!-- <li class="nav-item" v-if="$root.store.username">            
-            <div><CreateRecipe/></div>
-          </li>  -->
+         <li class="nav-item" v-if="$root.store.username">            
+            <router-link :to="{ name: 'createRecipe' }" style="text-decoration: none;">
+              <a class="nav-link" href=""  >Create Rcipes</a>
+            </router-link>
+          </li> 
           <li class="nav-item" v-if="$root.store.username">            
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
             <a class="nav-link disabled"> Welcome {{ $root.store.username }} ! <span class="sr-only"></span></a>            
@@ -86,8 +88,6 @@
 </template>
 
 <script>
-// import CreateRecipe from "./pages/CreateRecipe";
-// import { component } from 'vue/types/umd';
 export default {
   name: "App",
   methods: {
@@ -97,7 +97,6 @@ export default {
           "http://localhost:80/Logout",
         );
       this.$root.toast("Logout", "User logged out successfully", "success");
-
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
@@ -105,17 +104,12 @@ export default {
     routeRegister(){
       this.router.push("./pages/RegisterPage");
     }
-  },
-  components: {
-    // CreateRecipe,
-}
+  }
 };
-
 </script>
 
 <style lang="scss">
 @import "@/scss/form-style.scss";
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -123,17 +117,14 @@ export default {
   color: #2c3e50;
   min-height: 100vh;
 }
-
 #nav {
   padding: 30px;
   background-color: #edddba;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #a62501;
 }
