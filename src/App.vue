@@ -14,6 +14,8 @@
         {{ $root.store.username }}: <button @click="Logout">Logout</button>|        
       </span>
     </div> -->
+
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
       <router-link :to="{ name: 'main' }" style="text-decoration: none;">
         <a class="navbar-brand" > DorAlon Recipes</a>
@@ -56,7 +58,7 @@
            </li>
            <div class="dropdown-divider"></div>
             <li class="nav-item" >   
-            <router-link :to="{ name: 'userRecipes' }" style="text-decoration: none; color: black;">
+            <router-link :to="{ name: 'myrecipes' }" style="text-decoration: none; color: black;">
               My Recipes
             </router-link>
             </li>
@@ -67,10 +69,13 @@
             </router-link>
             </li>
          </b-nav-item-dropdown>         
-         <li class="nav-item" v-if="$root.store.username">            
-            <router-link :to="{ name: 'createRecipe' }" style="text-decoration: none;">
-              <a class="nav-link" href=""  >Create Rcipes</a>
-            </router-link>
+         <li v-if="$root.store.username" style="">            
+            <!-- <router-link :to="{ name: 'createRecipe' }" style="text-decoration: none;"> -->
+              <!-- <a class="nav-link" href="" @click.prevent="CreateRecipe">Create Recipes</a> -->
+              <CreateRecipe/>
+              <!-- <a class="nav-link" href="" @click.native="TestRec">Create Recipes</a> -->
+            <!-- </router-link> -->
+              <!-- <test v-on:click.native="TestRec"></test> -->
           </li> 
           <li class="nav-item" v-if="$root.store.username">            
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
@@ -88,6 +93,7 @@
 </template>
 
 <script>
+import CreateRecipe from "./components/CreateRecipe.vue";
 export default {
   name: "App",
   methods: {
@@ -104,6 +110,9 @@ export default {
     routeRegister(){
       this.router.push("./pages/RegisterPage");
     }
+  },
+  components: {
+    CreateRecipe
   }
 };
 </script>

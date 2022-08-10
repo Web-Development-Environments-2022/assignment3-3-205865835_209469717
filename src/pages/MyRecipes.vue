@@ -1,0 +1,69 @@
+<template>
+  <div>
+    
+    <b-container>
+        <h1>Your Recipies:</h1>
+        <div class="recipePreview">
+            <RecipePreviewVue v-for="r in this.recipes" :key="r.recipe_id"
+            v-bind:id="r.recipe_id"
+            v-bind:title="r.title"
+            v-bind:readyInMinutes=4
+            v-bind:image="r.imageUrl"
+            v-bind:aggregateLikes="0"
+            v-bind:vegan=false
+            v-bind:vegetarian=false
+            v-bind:glutenFree=false
+            />
+        </div>
+        
+<!-- 
+        <div v-else>
+            <h1>You haven't created any recipes.</h1>
+        </div> -->
+    </b-container>
+  </div>
+</template>
+
+<script>
+import RecipePreviewVue from '../components/RecipePreview.vue'
+export default {
+    name:"MyRecipes",
+    components:{
+        RecipePreviewVue
+    },
+    data(){
+        return{
+            recipes:[],
+            recipesGet:[],
+        }
+    },
+    
+    async mounted(){
+        const response = await this.axios.get(
+                        "http://localhost:80/user/userRecipes",
+        )
+        this.recipesGet = response.data
+        console.log(this.recipesGet.length)
+        for(let i = 0; i<(this.recipesGet.length);i++){
+            if(this.recipesGet.length<=i)
+                break
+            // console.log(this.recipesGet[i])
+            console.log(this.recipesGet[i])
+            this.recipes.push(this.recipesGet[i])
+        }
+        console.log(this.recipesGet)
+        
+        }
+    }
+
+</script>
+
+<style>
+.recipePreview{
+  display: inline-block;
+  margin: 12.5px;
+  border: 3px solid rgb(230, 230, 226);
+  border-radius: 10%;
+}
+
+</style>
