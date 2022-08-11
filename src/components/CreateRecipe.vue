@@ -81,8 +81,8 @@
 
       <b-form-group
         id="input-group-Ingredients"
-        label="Ingredients List and Amounts
-        (add a dot at the end of each sentence):"
+        label="Ingredients List and Amounts.
+        (Use linebreak for each ingredients):"
         label-for="Ingredients"
         :state="form.IngredientsState"
       >
@@ -101,7 +101,7 @@
       <b-form-group
         id="input-group-instructions"
         label="Instructions
-        (add a dot at the end of each sentence):"
+        (Use linebreak for each stage):"
         label-for="instructions"
         :state="form.instructionsState"
 
@@ -142,8 +142,8 @@
       <input type="checkbox" v-model="form.vegetarian" id="vegetarian">
       <label for="vegetarian"> Vegetarian</label>
       <br>
-      <input type="checkbox" id="gluten" v-model="form.gluten">
-      <label for="gluten">  Gluten</label>
+      <input type="checkbox" id="glutenFree" v-model="form.glutenFree">
+      <label for="glutenFree"> Gluten Free </label>
 
 
       
@@ -181,7 +181,7 @@ import { BButton, BModal, VBModal } from "bootstrap-vue";
         dishNumState: null ,
         vegan:0,
         vegetarian: 0,
-        gluten: 0
+        glutenFree: 0
 
         },
         errors: [],
@@ -259,17 +259,17 @@ import { BButton, BModal, VBModal } from "bootstrap-vue";
           
           console.log(vegan.modelValue)
           console.log(vegetarian.modelValue)
-          console.log(gluten.modelValue)
+          console.log(glutenFree.modelValue)
           
           if(this.form.vegan)
             this.form.vegan = 1
           else
             this.form.vegan = 0
           
-          if(this.form.gluten)
-            this.form.gluten = 1
+          if(this.form.glutenFree)
+            this.form.glutenFree = 1
           else
-            this.form.gluten = 0
+            this.form.glutenFree = 0
           
           if(this.form.vegetarian)
             this.form.vegetarian = 1
@@ -293,7 +293,7 @@ import { BButton, BModal, VBModal } from "bootstrap-vue";
           this.form.dishNumState= null,
           this.form.vegan= 0,
           this.form.vegetarian = 0,
-          this.form.gluten = 0
+          this.form.glutenFree = 0
         },
         async onSubmit(){
           try{
@@ -303,7 +303,7 @@ import { BButton, BModal, VBModal } from "bootstrap-vue";
             console.log(this.form.TotalTime)
             console.log(this.form.vegan)
             console.log(this.form.vegetarian)
-            console.log(this.form.gluten)
+            console.log(this.form.glutenFree)
             console.log(this.form.Ingredients)
             console.log(this.form.instructions)
             console.log(this.form.dishNum)
@@ -317,7 +317,7 @@ import { BButton, BModal, VBModal } from "bootstrap-vue";
             popularity:0,
             vegan:this.form.vegan,
             vegetarian:this.form.vegetarian,
-            gluten:this.form.gluten,
+            glutenFree:this.form.glutenFree,
             ingredients:this.form.Ingredients,
             instructions:this.form.instructions,
             servings:this.form.dishNum
@@ -351,7 +351,8 @@ import { BButton, BModal, VBModal } from "bootstrap-vue";
 label {
     /* Other styling... */
     /* text-align: right; */
-    width:300px
+    width:350px;
+    white-space:normal;
 }
 
 </style>

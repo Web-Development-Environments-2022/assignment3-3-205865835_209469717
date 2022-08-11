@@ -35,7 +35,10 @@
     
     <div v-if = !$root.store.username>
       <div class="Random_Recipes_Guest">
-        <RandomRecipe/>
+        <RandomRecipe :key="refresh"/>
+        <div class="center_button">
+        <b-button @click="UpdateRecipes()">Click here to refresh the recipes</b-button>
+        </div>
       </div>
       <div class="Mainpage_login">
         <Login/>
@@ -45,7 +48,10 @@
     <div v-else class="align_pages">
       <div class="Random_Recipes_User">
         <h1>Random Recipes:</h1>
-        <RandomRecipe/>
+        <RandomRecipe :key="refresh"/>
+        <div class="center_button">
+        <b-button @click="UpdateRecipes()">Click here to refresh the recipes</b-button>
+        </div>
       </div>
       <div class="Recent_Recipes">
         <h1> Last Watched Recipes: </h1>
@@ -53,9 +59,9 @@
       </div>
       
       
+      </div>
     </div>
 
-    </div>
   </div>
 
 
@@ -76,6 +82,16 @@ export default {
     UserHistory,
     RandomRecipe
   },
+  methods:{
+    async UpdateRecipes(){
+      this.refresh += 1
+    }
+  },
+  data(){
+    return{
+      refresh: 0
+    }
+  }
 };
 </script>
 
@@ -96,7 +112,9 @@ export default {
 //   //  text-align:center
    
 // }
-
+.center_button{
+  margin-left:200px
+}
 .Random_Recipes_Guest{
   // border:1px solid #000;
   display:inline-block;

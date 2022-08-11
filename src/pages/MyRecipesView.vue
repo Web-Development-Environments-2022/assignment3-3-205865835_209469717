@@ -1,3 +1,4 @@
+
 <template>
   <div class="container">
     <div v-if="recipe">
@@ -33,7 +34,7 @@
       <ul>
         <li
           v-for="(r, index) in this.recipe.extendedIngredients"
-          :key="index + '_' + r.id"
+          :key="index + '_' + r.recipe_id"
         >
           {{ r }}
         </li>
@@ -42,8 +43,8 @@
       <h1 class="ingredients-text"> Instructions </h1>
       <ol>
         <li class="step-li"
-          v-for="(r, index) in this.recipe._instructions.slice(0, -1)"
-          :key="index + '_' + r.id"
+          v-for="(r, index) in this.recipe._instructions.slice()"
+          :key="index + '_' + r.recipe_id"
         >
           {{ r }}
         </li>
@@ -67,7 +68,8 @@ export default {
     return {
       recipe: null,
       isFavorite:false,
-      watched:false
+      watched:false,
+      recipe_id:""
     };
   },
   methods:{
@@ -75,7 +77,7 @@ export default {
       const response = await this.axios.post(
           "http://localhost:80/user/favorites" ,
           {
-            recipe_id: this.recipe.id
+            recipe_id: this.recipe.recipe_id
           }
         );
     },
@@ -89,7 +91,7 @@ export default {
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
           // this.$root.store.server_domain + "/recipes/info",
-          "http://localhost:80/recipes/recipeDetails" + "/" + this.$route.params.recipeId,
+          "http://localhost:80/user/userRecipes",
           {
             // params: { id: this.$route.params.recipeId }
           }
@@ -102,26 +104,58 @@ export default {
         this.$router.replace("/NotFound");
         return;
       }
-
-      let {
-        id,
-        instructions,
-        extendedIngredients,
-        popularity,
-        readyInMinutes,
-        image,
-        vegan,
-        vegetarian,
-        glutenFree,
-        servings,
-        title
-      } = response.data;
-
-
-      let _instructions = instructions.split("\.");
+      try{
+      console.log(response.data)
+      for(let i=0;i<response.data.length;i++){
+        if (response.data[i].recipe_id == this.$route.params.recipeId){
+          this.recipe = response.data[i]
+          break
+        }
+        if (i=response.data.length-1)
+          throw error;
+      }
+      }catch (error) {
+        console.log("error.response.status", error.response.status);
+        this.$router.replace("/NotFound");
+        return;
+      }
+      
+      console.log(this.recipe.ingredients)
 
       let inFavorites = false; 
       let watched = false; 
+      let extendedIngredients = this.recipe.ingredients.split("\n");
+      let glutenFree = this.recipe.glutenFree;
+      let image = this.recipe.imageUrl
+      let id = this.recipe.recipe_id
+      let instructions = this.recipe.instructions
+      let popularity = this.recipe.aggregateLikes
+      let readyInMinutes = this.recipe.totalTime
+      let vegan = this.recipe.vegan
+      let vegetarian = this.recipe.vegetarian
+      let servings = this.recipe.servings
+      let title = this.recipe.title
+
+
+
+      let _instructions = instructions.split("\n");
+      console.log(_instructions)
+
+      // console.log(id,
+      //   instructions,
+      //   _instructions,
+      //   // analyzedInstructions,
+      //   extendedIngredients,
+      //   popularity,
+      //   readyInMinutes,
+      //   image,
+      //   vegan,
+      //   vegetarian,
+      //   glutenFree,
+      //   inFavorites,
+      //   watched,
+      //   servings,
+      //   title)
 
       let _recipe = {
         id,
@@ -140,6 +174,8 @@ export default {
         servings,
         title
       };
+      console.log(extendedIngredients)
+      
       this.recipe = _recipe;
     } catch (error) {
       console.log(error);
@@ -228,3 +264,4 @@ ol {
   font-weight: bold;
 }
 </style>
+

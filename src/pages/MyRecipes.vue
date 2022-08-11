@@ -4,7 +4,7 @@
     <b-container>
         <h1>Your Recipies:</h1>
         <div class="recipePreview">
-            <RecipePreviewVue v-for="r in this.recipes" :key="r.recipe_id"
+            <MyRecipePreview v-for="r in this.recipes" :key="r.recipe_id"
             v-bind:id="r.recipe_id"
             v-bind:title="r.title"
             v-bind:readyInMinutes=4
@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import RecipePreviewVue from '../components/RecipePreview.vue'
+import MyRecipePreview from '../components/MyRecipePreview.vue'
 export default {
     name:"MyRecipes",
     components:{
-        RecipePreviewVue
+        MyRecipePreview
     },
     data(){
         return{
