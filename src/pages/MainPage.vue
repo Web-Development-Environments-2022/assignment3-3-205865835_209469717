@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
 
 
   <div class="text">
@@ -30,42 +30,50 @@
     <span>T</span>
     <span>E</span>
   </div>
-    <div class="main_page">
+
+    <div>
     
-
-    <div class="Mainpage_login">
-    <Login/>
-    </div>  
-
-    <div class="Random_Recipes">
-      <div v-if = !$root.store.username>
+    <div v-if = !$root.store.username>
+      <div class="Random_Recipes_Guest">
         <RandomRecipe/>
       </div>
-
-      <div v-else>
-        Logged In
-        
+      <div class="Mainpage_login">
+        <Login/>
       </div>
+    </div>  
+
+    <div v-else class="align_pages">
+      <div class="Random_Recipes_User">
+        <h1>Random Recipes:</h1>
+        <RandomRecipe/>
+      </div>
+      <div class="Recent_Recipes">
+        <h1> Last Watched Recipes: </h1>
+        <UserHistory/>  
+      </div>
+      
+      
     </div>
 
-
     </div>
-
-
   </div>
+
+
 </template>
 
 <script>
 // import RecipePreviewList from "../components/RecipePreviewList";
 import RandomRecipe from "../components/RandomRecipe";
 import Login from "./LoginPage";
+import UserFavoritesVue from "./UserFavorites.vue";
+import UserHistory from "../components/UserHistory.vue";
 export default {
   mounted(){
 
   },
   components: {
-    // RecipePreviewList,
     Login,
+    UserHistory,
     RandomRecipe
   },
 };
@@ -89,13 +97,37 @@ export default {
    
 // }
 
-.Random_Recipes{
+.Random_Recipes_Guest{
   // border:1px solid #000;
   display:inline-block;
   width: 70%;
-  height: 0%;
+  // height: 0%;
   vertical-align:top; /* here */
-  margin-bottom: 100px;
+  // margin-bottom: 100px;
+  // padding: 2px;
+  
+  
+}
+.Random_Recipes_User{
+  // border:1px solid #000;
+  display:inline-block;
+  width: 50%;
+  // height: 0%;
+  vertical-align:top; /* here */
+  // margin-bottom: 100px;
+  // padding: 2px;
+  
+  
+}
+
+.Recent_Recipes{
+  // border:1px solid #000;
+  display:inline-block;
+  width: 50%;
+  // height: 0%;
+  // vertical-align:top; /* here */
+  // margin-bottom: 100px;
+  // padding: 2px;
 }
 
 .Mainpage_login{
@@ -163,6 +195,11 @@ export default {
       border-radius: 5px 0 0 5px;
     }
   }
+}
+
+.align_pages{
+      display: flex;
+    justify-content: space-between;
 }
 
 </style>

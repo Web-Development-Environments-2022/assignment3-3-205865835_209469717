@@ -147,7 +147,7 @@
         
       </b-form-group>
 
-      <p v-html="testData"></p>
+      <!-- <p v-html="testData"></p> -->
     
 
       <b-button
@@ -254,12 +254,16 @@ export default {
       try {
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
-          this.$root.store.server_domain + "/Register",
-
+          // this.$root.store.server_domain + "/Register",
+          "http://localhost:80/Register",
           {
             username: this.form.username,
-            password: this.form.password
-          }
+            firstname: this.form.firstName,
+            lastname: this.form.lastName,
+            country: this.form.country,
+            password: this.form.password,
+            email: this.form.email_address,
+          } 
         );
         this.$router.push("/login");
         // console.log(response);
