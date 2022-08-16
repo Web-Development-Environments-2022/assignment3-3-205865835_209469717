@@ -25,8 +25,6 @@
           <b>Yield: </b>     
           <p class="recipe-details">{{ this.recipe.servings }} servings</p>
           
-          <FavoriteHistory class="favorite-watched" v-bind:id="this.recipe.id"/>
-          
         </div>
       </div>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -62,7 +60,7 @@ import FavoriteHistory from "../components/FavoriteHistory";
 
 export default {
   components: {
-    FavoriteHistory
+
   },
   data() {
     return {
@@ -72,16 +70,7 @@ export default {
       recipe_id:""
     };
   },
-  methods:{
-    async addToFavorites(){
-      const response = await this.axios.post(
-          "http://localhost:80/user/favorites" ,
-          {
-            recipe_id: this.recipe.recipe_id
-          }
-        );
-    },
-  },
+  
   async created() {
     try {
       let response;
@@ -111,11 +100,11 @@ export default {
           this.recipe = response.data[i]
           break
         }
-        if (i=response.data.length-1)
+        if (i==response.data.length-1)
           throw error;
       }
       }catch (error) {
-        console.log("error.response.status", error.response.status);
+        console.log("error.response.status", error.response);
         this.$router.replace("/NotFound");
         return;
       }
@@ -262,6 +251,9 @@ ol {
   content: "Step " counter(elementcounter) ". ";
   counter-increment: elementcounter;
   font-weight: bold;
+  
 }
+
+
 </style>
 

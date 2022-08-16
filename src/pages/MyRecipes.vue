@@ -3,16 +3,16 @@
     
     <b-container>
         <h1>Your Recipies:</h1>
-        <div class="recipePreview">
-            <MyRecipePreview v-for="r in this.recipes" :key="r.recipe_id"
+        <div>
+            <MyRecipePreview class="recipePreview" v-for="r in this.recipes" :key="r.recipe_id"
             v-bind:id="r.recipe_id"
             v-bind:title="r.title"
             v-bind:readyInMinutes=4
             v-bind:image="r.imageUrl"
             v-bind:aggregateLikes="0"
-            v-bind:vegan=false
-            v-bind:vegetarian=false
-            v-bind:glutenFree=false
+            v-bind:vegan="Boolean(r.vegan)"
+            v-bind:vegetarian="Boolean(r.vegetarian)"
+            v-bind:glutenFree="Boolean(r.glutenFree)"
             />
         </div>
         

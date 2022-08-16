@@ -228,7 +228,7 @@ import { BButton, BModal, VBModal } from "bootstrap-vue";
           else{
             this.form.ImageURLState = true
           }
-          if (this.form.TotalTime.length == 0){
+          if (this.form.TotalTime.length == 0 || this.form.TotalTime <= 0){
             this.form.TotalTimeState = false
             return false
             }
@@ -249,17 +249,13 @@ import { BButton, BModal, VBModal } from "bootstrap-vue";
           else{
             this.form.instructionsState = true
           }
-          if (this.form.dishNum.length == 0){
+          if (this.form.dishNum.length == 0 || this.form.dishNum <= 0){
             this.form.dishNumState = false
             return false
             }
           else{
             this.form.dishNumState = true
           }
-          
-          console.log(vegan.modelValue)
-          console.log(vegetarian.modelValue)
-          console.log(glutenFree.modelValue)
           
           if(this.form.vegan)
             this.form.vegan = 1
