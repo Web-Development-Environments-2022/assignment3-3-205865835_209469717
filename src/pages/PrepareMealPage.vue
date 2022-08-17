@@ -62,7 +62,11 @@ export default {
   },
   async mounted(){
     this.recipes = await this.axios.get(
+<<<<<<< HEAD
       "https://doralonrecipes.cs.bgu.ac.il/user/mealRecipes",
+=======
+      "http://localhost:80/user/mealRecipes",
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
       {
         params:{},
       }
@@ -100,7 +104,11 @@ export default {
   methods:{
     async moveUp(recipe_c, recipe_i){
         await this.axios.put(
+<<<<<<< HEAD
           "https://doralonrecipes.cs.bgu.ac.il/user/changeMealOrderAbove" ,
+=======
+          "http://localhost:80/user/changeMealOrderAbove" ,
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
           {
             recipe_count: recipe_c,
             recipe_id : recipe_i
@@ -108,7 +116,11 @@ export default {
         );
 
         this.recipes = await this.axios.get(
+<<<<<<< HEAD
             "https://doralonrecipes.cs.bgu.ac.il/user/mealRecipes",
+=======
+            "http://localhost:80/user/mealRecipes",
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
             {
                 params:{},
             }
@@ -116,14 +128,22 @@ export default {
     },
     async moveDown(recipe_c, recipe_i){
         await this.axios.put(
+<<<<<<< HEAD
           "https://doralonrecipes.cs.bgu.ac.il/user/changeMealOrderBellow" ,
+=======
+          "http://localhost:80/user/changeMealOrderBellow" ,
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
           {
             recipe_count: recipe_c,
             recipe_id : recipe_i
           }
         );        
         this.recipes = await this.axios.get(
+<<<<<<< HEAD
             "https://doralonrecipes.cs.bgu.ac.il/user/mealRecipes",
+=======
+            "http://localhost:80/user/mealRecipes",
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
             {
                 params:{},
             }
@@ -131,14 +151,22 @@ export default {
     },
     async deleteSingleRecipe(recipe_i){
         await this.axios.delete(
+<<<<<<< HEAD
           "https://doralonrecipes.cs.bgu.ac.il/user/RemoveRecipeFromMeal" ,
+=======
+          "http://localhost:80/user/RemoveRecipeFromMeal" ,
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
           {  data:{
             recipe_id : recipe_i
           }            
           }
         );
         this.recipes = await this.axios.get(
+<<<<<<< HEAD
             "https://doralonrecipes.cs.bgu.ac.il/user/mealRecipes",
+=======
+            "http://localhost:80/user/mealRecipes",
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
             {
                 params:{},
             }
@@ -148,12 +176,20 @@ export default {
     },
     async resetMeal(){        
         await this.axios.delete(
+<<<<<<< HEAD
           "https://doralonrecipes.cs.bgu.ac.il/user/resetMeal" ,
+=======
+          "http://localhost:80/user/resetMeal" ,
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
           {  
           }                      
         );
         this.recipes = await this.axios.get(
+<<<<<<< HEAD
             "https://doralonrecipes.cs.bgu.ac.il/user/mealRecipes",
+=======
+            "http://localhost:80/user/mealRecipes",
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
             {
                 params:{},
             }

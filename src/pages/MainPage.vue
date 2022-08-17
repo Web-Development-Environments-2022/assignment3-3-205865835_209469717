@@ -47,7 +47,11 @@
 
     <div v-else class="align_pages">
       <div class="Random_Recipes_User">
+<<<<<<< HEAD
         <h1>Explore These Recipes:</h1>
+=======
+        <h1>Random Recipes:</h1>
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
         <RandomRecipe :key="refresh"/>
         <div class="center_button">
         <b-button @click="UpdateRecipes()">Click here to refresh the recipes</b-button>
@@ -56,7 +60,13 @@
       <div class="Recent_Recipes">
         <h1> Last Watched Recipes: </h1>
         <UserHistory/>  
+<<<<<<< HEAD
       </div>            
+=======
+      </div>
+      
+      
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
       </div>
     </div>
 

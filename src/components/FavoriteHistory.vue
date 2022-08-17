@@ -33,13 +33,21 @@ export default {
     if (this.$root.store.username){
       try{
       this.history = await this.axios.get(
+<<<<<<< HEAD
       "https://doralonrecipes.cs.bgu.ac.il/user/history",
+=======
+      "http://localhost:80/user/history",
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
       {
         params:{},
       }
       );
       this.favorites = await this.axios.get(
+<<<<<<< HEAD
         "https://doralonrecipes.cs.bgu.ac.il/user/favorites",
+=======
+        "http://localhost:80/user/favorites",
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
         {
           params:{},
         }

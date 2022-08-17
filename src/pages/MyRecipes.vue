@@ -8,7 +8,11 @@
             <MyRecipePreview class="recipePreview" v-for="r in this.recipes" :key="r.recipe_id"
             v-bind:id="r.recipe_id"
             v-bind:title="r.title"
+<<<<<<< HEAD
             v-bind:readyInMinutes="r.totalTime"
+=======
+            v-bind:readyInMinutes=4
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
             v-bind:image="r.imageUrl"
             v-bind:aggregateLikes="0"
             v-bind:vegan="Boolean(r.vegan)"
@@ -41,7 +45,11 @@ export default {
     
     async mounted(){
         const response = await this.axios.get(
+<<<<<<< HEAD
                         "https://doralonrecipes.cs.bgu.ac.il/user/userRecipes",
+=======
+                        "http://localhost:80/user/userRecipes",
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
         )
         this.recipesGet = response.data
         console.log(this.recipesGet.length)
@@ -49,10 +57,17 @@ export default {
             if(this.recipesGet.length<=i)
                 break
             // console.log(this.recipesGet[i])
+<<<<<<< HEAD
             // console.log(this.recipesGet[i])
             this.recipes.push(this.recipesGet[i])
         }
         // console.log(this.recipesGet)
+=======
+            console.log(this.recipesGet[i])
+            this.recipes.push(this.recipesGet[i])
+        }
+        console.log(this.recipesGet)
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
         
         }
     }

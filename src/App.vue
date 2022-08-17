@@ -84,10 +84,17 @@
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
             <a class="nav-link disabled"> Welcome {{ $root.store.username }} ! <span class="sr-only"></span></a>            
           </li>   
+<<<<<<< HEAD
           <li class="nav-item" v-else>            
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>       -->
             <a class="nav-link disabled"> Welcome Guest ! <span class="sr-only"></span></a>            
           </li>   
+=======
+          <!-- <li class="nav-item" v-else>            
+            {{ $root.store.username }}: <button @click="Logout">Logout</button>      
+            <a class="nav-link disabled"> Welcome Guest ! <span class="sr-only"></span></a>            
+          </li>    -->
+>>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
           <li class="nav-item" v-if="$root.store.username" style="margin-right: auto !important">            
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
             <a class="nav-link" href="#" @click="Logout"> Logout <span class="sr-only"></span></a>            
