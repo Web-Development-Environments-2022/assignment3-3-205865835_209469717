@@ -194,9 +194,9 @@ export default {
       if (that.intoleranceSelected != "No Intolerances"){
         intolerance_ = that.intoleranceSelected;
       }
-      try{
+      try{ 
         const response = await this.axios.get(
-          "http://localhost:80/recipes/search" + "/" + that.searchQuery + "/" + that.amountSelected + "/" + cuisine_ + "/" + diet_ + "/" + intolerance_,
+          "https://doralonrecipes.cs.bgu.ac.il/recipes/search" + "/" + that.searchQuery + "/" + that.amountSelected + "/" + cuisine_ + "/" + diet_ + "/" + intolerance_,
           // this.$root.store.server_domain + "/recipes/search" + "/" + that.searchQuery + "/" + that.amountSelected + "/" + cuisine_ + "/" + diet_ + "/" + intolerance_,
           {
             params:{},

@@ -29,7 +29,7 @@ export default {
   },
   async mounted(){
     this.favorites = await this.axios.get(
-      "http://localhost:80/user/favorites",
+      "https://doralonrecipes.cs.bgu.ac.il/user/favorites",
       {
         params:{},
       }
@@ -40,7 +40,7 @@ export default {
       this.recipes.push(
         await this.axios.get(
           // this.$root.store.server_domain + "/recipes/info",
-          "http://localhost:80/recipes/recipeDetails" + "/" + this.favorites.data[i].recipe_id,
+          "https://doralonrecipes.cs.bgu.ac.il/recipes/recipeDetails" + "/" + this.favorites.data[i].recipe_id,
           {}
         )
       );

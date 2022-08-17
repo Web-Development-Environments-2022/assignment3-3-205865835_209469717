@@ -6,6 +6,15 @@ axios.defaults.withCredentials = true;
 
 import VueCookies from 'vue-cookies'
 
+import { BProgress } from 'bootstrap-vue'
+import { BProgressBar } from 'bootstrap-vue'
+Vue.component('b-progress', BProgress)
+Vue.component('b-progress-bar', BProgressBar)
+
+import { BFormTextarea } from 'bootstrap-vue'
+Vue.component('b-form-textarea', BFormTextarea)
+
+
 import routes from "./routes";
 import VueRouter from "vue-router"; 
 Vue.use(VueRouter);

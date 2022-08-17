@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <b-container>
     <h3>
       {{ title }}:
@@ -58,4 +58,4 @@ export default {
 .container {
   min-height: 400px;
 }
-</style>
+</style> -->

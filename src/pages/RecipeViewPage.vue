@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container">       
     <div v-if="recipe">
     <h1 class="title-text">{{ this.recipe.title }}</h1>
-      <div class="wrapper">
+      <div class="wrapper">          
         <div class="left">
-          <img :src="recipe.image" class="recipe-image" />
+          <img :src="recipe.image" style="border-radius: 10%;" />
           <div class="images">
             <img src="../assets/vegan.png" class="diet-image" v-if="typeof recipe.vegan === 'boolean' && recipe.vegan"/>
             <img src="../assets/vegetarian.png" class="diet-image" style="width: 15%; height: 15%;" v-if="typeof recipe.vegetarian === 'boolean' && recipe.vegetarian"/>
@@ -24,6 +24,7 @@
           <b>Yield: </b>     
           <p class="recipe-details">{{ this.recipe.servings }} servings</p>
           
+          <MakeRecipeButton class="make-recipe" v-bind:id="this.recipe.id" v-bind:title="this.recipe.title" v-bind:image="this.recipe.image" v-bind:ingredients="this.fullIngredients" v-bind:servings="this.recipe.servings"/>
           <FavoriteHistory class="favorite-watched" v-bind:id="this.recipe.id"/>
           
         </div>
@@ -32,9 +33,7 @@
       <h1 class="ingredients-text"> Ingredients </h1>
       <ul>
         <li
-          v-for="(r, index) in this.recipe.extendedIngredients"
-          :key="index + '_' + r.id"
-        >
+          v-for="(r, index) in this.recipe.extendedIngredients" :key="index + '_'">
           {{ r }}
         </li>
       </ul>
@@ -57,23 +56,26 @@
 <script>
 
 import FavoriteHistory from "../components/FavoriteHistory";
+import MakeRecipeButton from "../components/MakeRecipeButton.vue";
 
 
 export default {
   components: {
-    FavoriteHistory
+    FavoriteHistory,
+    MakeRecipeButton
   },
   data() {
     return {
       recipe: null,
       isFavorite:false,
-      watched:false
+      watched:false,
+      fullIngredients:null
     };
   },
   methods:{
     async addToFavorites(){
       const response = await this.axios.post(
-          "http://localhost:80/user/favorites" ,
+          "https://doralonrecipes.cs.bgu.ac.il/user/favorites" ,
           {
             recipe_id: this.recipe.id
           }
@@ -89,7 +91,7 @@ export default {
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
           // this.$root.store.server_domain + "/recipes/info",
-          "http://localhost:80/recipes/recipeDetails" + "/" + this.$route.params.recipeId,
+          "https://doralonrecipes.cs.bgu.ac.il/recipes/recipeDetails" + "/" + this.$route.params.recipeId,
           {
             // params: { id: this.$route.params.recipeId }
           }
@@ -140,7 +142,12 @@ export default {
         servings,
         title
       };
-
+      this.fullIngredients = _recipe.extendedIngredients;
+      let _extendedIngredients = [];
+      for (let i =0; i < _recipe.extendedIngredients.length; i++){
+        _extendedIngredients.push(_recipe.extendedIngredients[i].original)
+      }
+      _recipe.extendedIngredients = _extendedIngredients;
       this.recipe = _recipe;
     } catch (error) {
       console.log(error);
@@ -176,11 +183,15 @@ export default {
     /* margin-right: -300px; */
 }
 .favorite-watched{
-      margin-top: 175px;
+      margin-top: 15px;
       width: 205px;
       margin-left: 30px;
 
 }
+.make-recipe{
+  margin-top:155px;
+}
+
 .title-text{
   font-weight: bold;
   font-family: Garamond, serif;
@@ -195,6 +206,7 @@ export default {
   border-radius: 15px;
   padding: 5px;
   width: 550px;
+  height: auto;
 }
 .diet-image{
   width: 11.5%;

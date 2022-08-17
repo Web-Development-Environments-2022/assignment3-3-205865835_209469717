@@ -26,7 +26,7 @@ export default {
   },
   async mounted(){
     this.recipes = await this.axios.get(
-        "http://localhost:80/familyrecipes/getFamRecipes" ,
+        "https://doralonrecipes.cs.bgu.ac.il/familyrecipes/getFamRecipes" ,
         {        
         }
     );

@@ -100,10 +100,9 @@ export default {
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Login",
           // this.$root.store.server_domain +"/Login",
-          "http://localhost:80/Login",
+          "https://doralonrecipes.cs.bgu.ac.il/Login",
           // "http://132.72.65.211:80/Login",
           // "http://132.73.84.100:80/Login",
-
           {
             username: this.form.username,
             password: this.form.password
@@ -127,7 +126,6 @@ export default {
         return;
       }
       // console.log("login method go");
-
       this.Login();
     }
   }
@@ -138,7 +136,6 @@ export default {
   margin-bottom:60px;
   margin-left:100px;
   font-family: Georgia, serif;
-
 }
 .inputs{
   margin-bottom:50px;

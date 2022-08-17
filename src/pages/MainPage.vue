@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
 
 
   <div class="text">
@@ -30,44 +30,65 @@
     <span>T</span>
     <span>E</span>
   </div>
-    <div class="main_page">
-    
 
-    <div class="Mainpage_login">
-    <Login/>
+    <div>
+    
+    <div v-if = !$root.store.username>
+      <div class="Random_Recipes_Guest">
+        <RandomRecipe :key="refresh"/>
+        <div class="center_button">
+        <b-button @click="UpdateRecipes()">Click here to refresh the recipes</b-button>
+        </div>
+      </div>
+      <div class="Mainpage_login">
+        <Login/>
+      </div>
     </div>  
 
-    <div class="Random_Recipes">
-      <div v-if = !$root.store.username>
-        <RandomRecipe/>
+    <div v-else class="align_pages">
+      <div class="Random_Recipes_User">
+        <h1>Explore These Recipes:</h1>
+        <RandomRecipe :key="refresh"/>
+        <div class="center_button">
+        <b-button @click="UpdateRecipes()">Click here to refresh the recipes</b-button>
+        </div>
       </div>
-
-      <div v-else>
-        Logged In
-        
+      <div class="Recent_Recipes">
+        <h1> Last Watched Recipes: </h1>
+        <UserHistory/>  
+      </div>            
       </div>
     </div>
-
-
-    </div>
-
 
   </div>
+
+
 </template>
 
 <script>
-// import RecipePreviewList from "../components/RecipePreviewList";
+import RecipePreviewList from "../components/RecipePreviewList";
 import RandomRecipe from "../components/RandomRecipe";
 import Login from "./LoginPage";
+import UserFavoritesVue from "./UserFavorites.vue";
+import UserHistory from "../components/UserHistory.vue";
 export default {
   mounted(){
-
   },
   components: {
-    // RecipePreviewList,
     Login,
+    UserHistory,
     RandomRecipe
   },
+  methods:{
+    async UpdateRecipes(){
+      this.refresh += 1
+    }
+  },
+  data(){
+    return{
+      refresh: 0
+    }
+  }
 };
 </script>
 
@@ -83,21 +104,44 @@ export default {
   pointer-events: none;
   cursor: default;
 }
-
 // .main_page{
 //   //  text-align:center
    
 // }
-
-.Random_Recipes{
+.center_button{
+  margin-left:200px
+}
+.Random_Recipes_Guest{
   // border:1px solid #000;
   display:inline-block;
   width: 70%;
-  height: 0%;
+  // height: 0%;
   vertical-align:top; /* here */
-  margin-bottom: 100px;
+  // margin-bottom: 100px;
+  // padding: 2px;
+  
+  
 }
-
+.Random_Recipes_User{
+  // border:1px solid #000;
+  display:inline-block;
+  width: 50%;
+  // height: 0%;
+  vertical-align:top; /* here */
+  // margin-bottom: 100px;
+  // padding: 2px;
+  
+  
+}
+.Recent_Recipes{
+  // border:1px solid #000;
+  display:inline-block;
+  width: 50%;
+  // height: 0%;
+  // vertical-align:top; /* here */
+  // margin-bottom: 100px;
+  // padding: 2px;
+}
 .Mainpage_login{
   // border:1px solid red;
   display:inline-block;
@@ -106,22 +150,16 @@ export default {
   line-height: 100%;
   vertical-align: top; /* here */
   
-
 }
 .image-fit{
   width: 300px; 
   height: 200px; 
-
   // object-fit: scale-down;
   object-fit:fill;
-
-
   // width: 300px; 
   // height: 337px; 
   // object-fit: contain;
 }
-
-
 .text {
   display: flex;
   justify-content: center;
@@ -164,7 +202,8 @@ export default {
     }
   }
 }
-
+.align_pages{
+      display: flex;
+    justify-content: space-between;
+}
 </style>
-
-

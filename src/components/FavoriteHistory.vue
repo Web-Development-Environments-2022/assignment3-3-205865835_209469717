@@ -1,4 +1,4 @@
-<template>
+  <template>
 <div class ="all-details">
     <div v-if="$root.store.username">
         <div class="favorites" v-if="typeof favorite === 'boolean' && !favorite">
@@ -29,30 +29,37 @@
 <script>
 
 export default {
-  async mounted() {
-    this.history = await this.axios.get(
-      "http://localhost:80/user/history",
+  async mounted() {    
+    if (this.$root.store.username){
+      try{
+      this.history = await this.axios.get(
+      "https://doralonrecipes.cs.bgu.ac.il/user/history",
       {
         params:{},
       }
-    );
-    this.favorites = await this.axios.get(
-      "http://localhost:80/user/favorites",
-      {
-        params:{},
+      );
+      this.favorites = await this.axios.get(
+        "https://doralonrecipes.cs.bgu.ac.il/user/favorites",
+        {
+          params:{},
+        }
+      );
+      let history_ids = [];
+      for (let i = 0; i < this.history.data.length; i++) {
+        history_ids.push(this.history.data[i].recipe_id);
       }
-    );
-    let history_ids = [];
-    for (let i = 0; i < this.history.data.length; i++) {
-      history_ids.push(this.history.data[i].recipe_id);
+      let favorites_ids = [];
+      for (let i = 0; i < this.favorites.data.length; i++) {
+        favorites_ids.push(this.favorites.data[i].recipe_id);
+      }
+      this.favorite = favorites_ids.includes(this.id);
+      this.watched = history_ids.includes(this.id);
+      }
+      catch(error){
+        this.favorite = false;
+        this.watched = false; 
+      }
     }
-    let favorites_ids = [];
-    for (let i = 0; i < this.favorites.data.length; i++) {
-      favorites_ids.push(this.favorites.data[i].recipe_id);
-    }
-    this.favorite = favorites_ids.includes(this.id);
-    this.watched = history_ids.includes(this.id);
-
   },
   data() {
     return {
@@ -73,7 +80,7 @@ export default {
     async addToFavorites(){
       this.favorite = true;
       const response = await this.axios.post(
-          "http://localhost:80/user/favorites" ,
+          "https://doralonrecipes.cs.bgu.ac.il/user/favorites" ,
           {
             recipe_id: this.id
           }
@@ -101,6 +108,7 @@ export default {
   font-family: 'Times New Roman', serif;
   /* font-size: large; */
   font-size:95%;
+   
 }
 
 .favorites{

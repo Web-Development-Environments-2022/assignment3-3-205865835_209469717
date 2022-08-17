@@ -46,28 +46,28 @@ export default {
     this.axios.get(this.image, {withCredentials:false}).then((i) => {
       this.image_load = true;
     });
-    this.history = await this.axios.get(
-      "http://localhost:80/user/history",
-      {
-        params:{},
-      }
-    );
-    this.favorites = await this.axios.get(
-      "http://localhost:80/user/favorites",
-      {
-        params:{},
-      }
-    );
-    let history_ids = [];
-    for (let i = 0; i < this.history.data.length; i++) {
-      history_ids.push(this.history.data[i].recipe_id);
-    }
-    let favorites_ids = [];
-    for (let i = 0; i < this.favorites.data.length; i++) {
-      favorites_ids.push(this.favorites.data[i].recipe_id);
-    }
-    this.favorite = favorites_ids.includes(this.id);
-    this.watched = history_ids.includes(this.id);
+    // this.history = await this.axios.get(
+    //   "http://localhost:80/user/history",
+    //   {
+    //     params:{},
+    //   }
+    // );
+    // this.favorites = await this.axios.get(
+    //   "http://localhost:80/user/favorites",
+    //   {
+    //     params:{},
+    //   }
+    // );
+    // let history_ids = [];
+    // for (let i = 0; i < this.history.data.length; i++) {
+    //   history_ids.push(this.history.data[i].recipe_id);
+    // }
+    // let favorites_ids = [];
+    // for (let i = 0; i < this.favorites.data.length; i++) {
+    //   favorites_ids.push(this.favorites.data[i].recipe_id);
+    // }
+    // this.favorite = favorites_ids.includes(this.id);
+    // this.watched = history_ids.includes(this.id);
 
 
   },
@@ -113,15 +113,15 @@ export default {
     aggregateLikes: {
       type: Number,
       required: false,
-      default() {
-        return undefined;
-      }
+      // default() {
+      //   return undefined;
+      // }
     }
   },
   methods:{
     async addToFavorites(){
       const response = await this.axios.post(
-          "http://localhost:80/user/favorites" ,
+          "https://doralonrecipes.cs.bgu.ac.il/user/favorites" ,
           {
             recipe_id: this.id
           }
@@ -129,7 +129,7 @@ export default {
     },
     async addToHistory(){
       const response = await this.axios.post(
-          "http://localhost:80/user/history" ,
+          "https://doralonrecipes.cs.bgu.ac.il/user/history" ,
           {
             recipe_id: this.id
           }

@@ -37,7 +37,7 @@ import RecipePreview from './RecipePreview';
     },
     async mounted(){
         const response = await this.axios.get(
-        "http://localhost:80/recipes/random"
+        "https://doralonrecipes.cs.bgu.ac.il/recipes/random"
         );
         this.recipes=(response.data);
 
