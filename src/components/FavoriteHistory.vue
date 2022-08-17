@@ -60,20 +60,6 @@ export default {
         this.watched = false; 
       }
     }
-    
-    
-
-    // let history_ids = [];
-    // for (let i = 0; i < this.history.data.length; i++) {
-    //   history_ids.push(this.history.data[i].recipe_id);
-    // }
-    // let favorites_ids = [];
-    // for (let i = 0; i < this.favorites.data.length; i++) {
-    //   favorites_ids.push(this.favorites.data[i].recipe_id);
-    // }
-    // this.favorite = favorites_ids.includes(this.id);
-    // this.watched = history_ids.includes(this.id);
-
   },
   data() {
     return {
@@ -122,6 +108,7 @@ export default {
   font-family: 'Times New Roman', serif;
   /* font-size: large; */
   font-size:95%;
+   
 }
 
 .favorites{

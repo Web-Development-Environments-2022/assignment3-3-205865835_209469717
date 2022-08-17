@@ -56,7 +56,7 @@
            </li>
            <div class="dropdown-divider"></div>
             <li class="nav-item" >   
-            <router-link :to="{ name: 'userRecipes' }" style="text-decoration: none; color: black;">
+             <router-link :to="{ name: 'myrecipes' }" style="text-decoration: none; color: black;">
               My Recipes
             </router-link>
             </li>
@@ -66,16 +66,28 @@
               Family Recipes
             </router-link>
             </li>
-         </b-nav-item-dropdown>         
-         <li class="nav-item" v-if="$root.store.username">            
-            <router-link :to="{ name: 'createRecipe' }" style="text-decoration: none;">
-              <a class="nav-link" href=""  >Create Rcipes</a>
+         </b-nav-item-dropdown>     
+	         <li v-if="$root.store.username" style="">            
+            <!-- <router-link :to="{ name: 'createRecipe' }" style="text-decoration: none;"> -->
+              <!-- <a class="nav-link" href="" @click.prevent="CreateRecipe">Create Recipes</a> -->
+              <CreateRecipe/>
+              <!-- <a class="nav-link" href="" @click.native="TestRec">Create Recipes</a> -->
+            <!-- </router-link> -->
+              <!-- <test v-on:click.native="TestRec"></test> -->
+          </li> 
+          <li class="nav-item" v-if="$root.store.username">            
+            <router-link :to="{ name: 'prepareMeal' }" style="text-decoration: none;">
+              <a class="nav-link" href=""  >Prepare Meal</a>
             </router-link>
           </li> 
           <li class="nav-item" v-if="$root.store.username">            
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
             <a class="nav-link disabled"> Welcome {{ $root.store.username }} ! <span class="sr-only"></span></a>            
           </li>   
+          <!-- <li class="nav-item" v-else>            
+            {{ $root.store.username }}: <button @click="Logout">Logout</button>      
+            <a class="nav-link disabled"> Welcome Guest ! <span class="sr-only"></span></a>            
+          </li>    -->
           <li class="nav-item" v-if="$root.store.username" style="margin-right: auto !important">            
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
             <a class="nav-link" href="#" @click="Logout"> Logout <span class="sr-only"></span></a>            
@@ -88,6 +100,7 @@
 </template>
 
 <script>
+import CreateRecipe from "./components/CreateRecipe.vue";
 export default {
   name: "App",
   methods: {
@@ -105,6 +118,9 @@ export default {
     routeRegister(){
       this.router.push("./pages/RegisterPage");
     }
+  },
+  components: {
+    CreateRecipe
   }
 };
 </script>

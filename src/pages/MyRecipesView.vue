@@ -1,10 +1,11 @@
+
 <template>
-  <div class="container">              
+  <div class="container">
     <div v-if="recipe">
     <h1 class="title-text">{{ this.recipe.title }}</h1>
-      <div class="wrapper">          
+      <div class="wrapper">
         <div class="left">
-          <img :src="recipe.image" style="border-radius: 10%;" />
+          <img :src="recipe.image" class="recipe-image" />
           <div class="images">
             <img src="../assets/vegan.png" class="diet-image" v-if="typeof recipe.vegan === 'boolean' && recipe.vegan"/>
             <img src="../assets/vegetarian.png" class="diet-image" style="width: 15%; height: 15%;" v-if="typeof recipe.vegetarian === 'boolean' && recipe.vegetarian"/>
@@ -24,9 +25,6 @@
           <b>Yield: </b>     
           <p class="recipe-details">{{ this.recipe.servings }} servings</p>
           
-          <MakeRecipeButton class="make-recipe" v-bind:id="this.recipe.id" v-bind:title="this.recipe.title" v-bind:image="this.recipe.image" v-bind:ingredients="this.fullIngredients" v-bind:servings="this.recipe.servings"/>
-          <FavoriteHistory class="favorite-watched" v-bind:id="this.recipe.id"/>
-          
         </div>
       </div>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -34,7 +32,7 @@
       <ul>
         <li
           v-for="(r, index) in this.recipe.extendedIngredients"
-          :key="index + '_' + r.id"
+          :key="index + '_' + r.recipe_id"
         >
           {{ r }}
         </li>
@@ -43,8 +41,8 @@
       <h1 class="ingredients-text"> Instructions </h1>
       <ol>
         <li class="step-li"
-          v-for="(r, index) in this.recipe._instructions.slice(0, -1)"
-          :key="index + '_' + r.id"
+          v-for="(r, index) in this.recipe._instructions.slice()"
+          :key="index + '_' + r.recipe_id"
         >
           {{ r }}
         </li>
@@ -56,49 +54,32 @@
 </template>
 
 <script>
-
 import FavoriteHistory from "../components/FavoriteHistory";
-import MakeRecipeButton from "../components/MakeRecipeButton.vue";
-
-
 export default {
   components: {
-    FavoriteHistory,
-    MakeRecipeButton
   },
   data() {
     return {
       recipe: null,
       isFavorite:false,
       watched:false,
-      fullIngredients:null
+      recipe_id:""
     };
   },
-  methods:{
-    async addToFavorites(){
-      const response = await this.axios.post(
-          "http://localhost:80/user/favorites" ,
-          {
-            recipe_id: this.recipe.id
-          }
-        );
-    },
-  },
+  
   async created() {
     try {
       let response;
       // response = this.$route.params.response;
-
       try {
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
           // this.$root.store.server_domain + "/recipes/info",
-          "http://localhost:80/recipes/recipeDetails" + "/" + this.$route.params.recipeId,
+          "http://localhost:80/user/userRecipes",
           {
             // params: { id: this.$route.params.recipeId }
           }
         );
-
         // console.log("response.status", response.status);
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
@@ -106,27 +87,53 @@ export default {
         this.$router.replace("/NotFound");
         return;
       }
-
-      let {
-        id,
-        instructions,
-        extendedIngredients,
-        popularity,
-        readyInMinutes,
-        image,
-        vegan,
-        vegetarian,
-        glutenFree,
-        servings,
-        title
-      } = response.data;
-
-
-      let _instructions = instructions.split("\.");
-
+      try{
+      console.log(response.data)
+      for(let i=0;i<response.data.length;i++){
+        if (response.data[i].recipe_id == this.$route.params.recipeId){
+          this.recipe = response.data[i]
+          break
+        }
+        if (i==response.data.length-1)
+          throw error;
+      }
+      }catch (error) {
+        console.log("error.response.status", error.response);
+        this.$router.replace("/NotFound");
+        return;
+      }
+      
+      console.log(this.recipe.ingredients)
       let inFavorites = false; 
       let watched = false; 
-
+      let extendedIngredients = this.recipe.ingredients.split("\n");
+      let glutenFree = this.recipe.glutenFree;
+      let image = this.recipe.imageUrl
+      let id = this.recipe.recipe_id
+      let instructions = this.recipe.instructions
+      let popularity = this.recipe.aggregateLikes
+      let readyInMinutes = this.recipe.totalTime
+      let vegan = this.recipe.vegan
+      let vegetarian = this.recipe.vegetarian
+      let servings = this.recipe.servings
+      let title = this.recipe.title
+      let _instructions = instructions.split("\n");
+      console.log(_instructions)
+      // console.log(id,
+      //   instructions,
+      //   _instructions,
+      //   // analyzedInstructions,
+      //   extendedIngredients,
+      //   popularity,
+      //   readyInMinutes,
+      //   image,
+      //   vegan,
+      //   vegetarian,
+      //   glutenFree,
+      //   inFavorites,
+      //   watched,
+      //   servings,
+      //   title)
       let _recipe = {
         id,
         instructions,
@@ -144,12 +151,8 @@ export default {
         servings,
         title
       };
-      this.fullIngredients = _recipe.extendedIngredients;
-      let _extendedIngredients = [];
-      for (let i =0; i < _recipe.extendedIngredients.length; i++){
-        _extendedIngredients.push(_recipe.extendedIngredients[i].original)
-      }
-      _recipe.extendedIngredients = _extendedIngredients;
+      console.log(extendedIngredients)
+      
       this.recipe = _recipe;
     } catch (error) {
       console.log(error);
@@ -159,15 +162,12 @@ export default {
 </script>
 
 <style scoped>
-
-
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
 }
-
 .wrapper {
     width: 1000px;
     /* border: 5px solid black; */
@@ -185,15 +185,10 @@ export default {
     /* margin-right: -300px; */
 }
 .favorite-watched{
-      margin-top: 15px;
+      margin-top: 175px;
       width: 205px;
       margin-left: 30px;
-
 }
-.make-recipe{
-  margin-top:155px;
-}
-
 .title-text{
   font-weight: bold;
   font-family: Garamond, serif;
@@ -208,7 +203,6 @@ export default {
   border-radius: 15px;
   padding: 5px;
   width: 550px;
-  height: auto;
 }
 .diet-image{
   width: 11.5%;
@@ -228,18 +222,16 @@ export default {
   font-size: large;
 }
 /* .recipe-header{
-
 } */
-
 ol {
   list-style-type: none;
   counter-reset: elementcounter;
   padding-left: 0;
 }
-
 .step-li:before {
   content: "Step " counter(elementcounter) ". ";
   counter-increment: elementcounter;
   font-weight: bold;
+  
 }
 </style>
