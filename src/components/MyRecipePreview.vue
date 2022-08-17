@@ -88,29 +88,6 @@ export default {
       }
     }
   },
-<<<<<<< HEAD
-=======
-  methods:{
-    async addToFavorites(){
-            console.log(this.id)
-      const response = await this.axios.post(
-          "http://localhost:80/user/favorites" ,
-          {
-            recipe_id: this.id
-          }
-        );
-    },
-    async addToHistory(){
-            console.log(this.id)
-      const response = await this.axios.post(
-          "http://localhost:80/user/history" ,
-          {
-            recipe_id: this.id
-          }
-        );
-    }
-  },
->>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
 };
 </script>
 

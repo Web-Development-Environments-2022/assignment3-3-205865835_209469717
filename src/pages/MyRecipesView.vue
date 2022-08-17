@@ -75,11 +75,7 @@ export default {
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
           // this.$root.store.server_domain + "/recipes/info",
-<<<<<<< HEAD
           "https://doralonrecipes.cs.bgu.ac.il/user/userRecipes",
-=======
-          "http://localhost:80/user/userRecipes",
->>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
           {
             // params: { id: this.$route.params.recipeId }
           }

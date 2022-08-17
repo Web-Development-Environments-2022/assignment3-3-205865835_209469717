@@ -13,11 +13,7 @@
             v-bind:vegan="recipe.vegan"
             v-bind:vegetarian="recipe.vegetarian"
             v-bind:glutenFree="recipe.glutenFree"
-<<<<<<< HEAD
             v-bind:aggregateLikes="recipe.popularity"
-=======
-            v-bind:aggregateLikes="recipe.aggregateLikes"
->>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
             />
         </div>
         
@@ -58,11 +54,7 @@ export default({
     },
     async mounted(){ 
         const response = await this.axios.get(
-<<<<<<< HEAD
         "https://doralonrecipes.cs.bgu.ac.il/user/history"
-=======
-        "http://localhost:80/user/history"
->>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
         );
         this.ids=(response.data);
         for(let i=0;i<3;i++){
@@ -70,11 +62,7 @@ export default({
                 break
             // console.log(this.ids[i].recipe_id);
             this.history.push(
-<<<<<<< HEAD
                 (await this.axios.get("https://doralonrecipes.cs.bgu.ac.il/recipes/recipeDetails" + "/" + this.ids[i].recipe_id)).data
-=======
-                (await this.axios.get("http://localhost:80/recipes/recipeDetails" + "/" + this.ids[i].recipe_id)).data
->>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
                 
             )
         }

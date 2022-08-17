@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
   <div class="container">       
-=======
-  <div class="container">              
->>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
     <div v-if="recipe">
     <h1 class="title-text">{{ this.recipe.title }}</h1>
       <div class="wrapper">          

@@ -26,11 +26,7 @@ export default {
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
           // this.$root.store.server_domain + "/recipes/info",
-<<<<<<< HEAD
           "https://doralonrecipes.cs.bgu.ac.il/recipes/recipeAnalyzed" + "/" + this.id,
-=======
-          "http://localhost:80/recipes/recipeAnalyzed" + "/" + this.id,
->>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
           {
             // params: { id: this.$route.params.recipeId }
           }
@@ -67,11 +63,7 @@ export default {
         alert("recipe added to meal");
       }
       const response = await this.axios.post(
-<<<<<<< HEAD
           "https://doralonrecipes.cs.bgu.ac.il/user/addRecipeToMeal" ,
-=======
-          "http://localhost:80/user/addRecipeToMeal" ,
->>>>>>> 90fc2cd4e4db9ec5064879c40a71a77b1a13184c
         {
           imageUrl: this.image,
           title: this.title,
