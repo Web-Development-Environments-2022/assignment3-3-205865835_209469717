@@ -17,8 +17,6 @@ Vue.component('b-form-textarea', BFormTextarea)
 
 import routes from "./routes";
 import VueRouter from "vue-router"; 
-import { BFormTextarea } from 'bootstrap-vue'
-Vue.component('b-form-textarea', BFormTextarea)
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes,

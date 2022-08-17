@@ -14,8 +14,6 @@
         {{ $root.store.username }}: <button @click="Logout">Logout</button>|        
       </span>
     </div> -->
-
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
       <router-link :to="{ name: 'main' }" style="text-decoration: none;">
         <a class="navbar-brand" > DorAlon Recipes</a>
@@ -58,11 +56,7 @@
            </li>
            <div class="dropdown-divider"></div>
             <li class="nav-item" >   
-<<<<<<< HEAD
              <router-link :to="{ name: 'myrecipes' }" style="text-decoration: none; color: black;">
-=======
-            <router-link :to="{ name: 'myrecipes' }" style="text-decoration: none; color: black;">
->>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
               My Recipes
             </router-link>
             </li>
@@ -72,27 +66,19 @@
               Family Recipes
             </router-link>
             </li>
-<<<<<<< HEAD
          </b-nav-item-dropdown>     
 	         <li v-if="$root.store.username" style="">            
-=======
-         </b-nav-item-dropdown>         
-         <li v-if="$root.store.username" style="">            
->>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
             <!-- <router-link :to="{ name: 'createRecipe' }" style="text-decoration: none;"> -->
               <!-- <a class="nav-link" href="" @click.prevent="CreateRecipe">Create Recipes</a> -->
               <CreateRecipe/>
               <!-- <a class="nav-link" href="" @click.native="TestRec">Create Recipes</a> -->
             <!-- </router-link> -->
               <!-- <test v-on:click.native="TestRec"></test> -->
-<<<<<<< HEAD
           </li> 
           <li class="nav-item" v-if="$root.store.username">            
             <router-link :to="{ name: 'prepareMeal' }" style="text-decoration: none;">
               <a class="nav-link" href=""  >Prepare Meal</a>
             </router-link>
-=======
->>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
           </li> 
           <li class="nav-item" v-if="$root.store.username">            
             <!-- {{ $root.store.username }}: <button @click="Logout">Logout</button>      --> 
@@ -124,6 +110,7 @@ export default {
           "http://localhost:80/Logout",
         );
       this.$root.toast("Logout", "User logged out successfully", "success");
+
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
@@ -140,6 +127,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/form-style.scss";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -147,14 +135,17 @@ export default {
   color: #2c3e50;
   min-height: 100vh;
 }
+
 #nav {
   padding: 30px;
   background-color: #edddba;
 }
+
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
+
 #nav a.router-link-exact-active {
   color: #a62501;
 }

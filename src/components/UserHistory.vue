@@ -41,31 +41,17 @@
 
 <script>
 import RecipePreview from "./RecipePreview.vue";
-<<<<<<< HEAD
-=======
-
->>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 export default({
     name: "userHistory",
     components:{
         RecipePreview
     },
-<<<<<<< HEAD
-=======
-
->>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
     data(){
         return{
             history : [],
             ids: []
         }
-<<<<<<< HEAD
     },
-=======
-
-    },
-
->>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
     async mounted(){ 
         const response = await this.axios.get(
         "http://localhost:80/user/history"
@@ -81,29 +67,14 @@ export default({
             )
         }
 },
-<<<<<<< HEAD
 })
 </script>
 
 <style>
-=======
-
-})
-
-</script>
-
-<style>
-
->>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .recipePreview{
   display: inline-block;
   margin: 12.5px;
   border: 3px solid rgb(230, 230, 226);
   border-radius: 10%;
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 </style>
