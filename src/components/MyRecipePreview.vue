@@ -26,6 +26,10 @@
           <img src="../assets/vegetarian.png" class="diet-image" style="width: 22.5%; height: 22.5%;" v-if="typeof vegetarian === 'boolean' && vegetarian"/>
           <img src="../assets/gluten.png" class="diet-image" v-if="typeof glutenFree === 'boolean' && glutenFree"/>
         </div>
+<<<<<<< HEAD
+=======
+        <FavoriteHistory class="favorite-button" v-bind:id="this.id"/>
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
       </ul>
     </div>
 </div>
@@ -34,12 +38,48 @@
 
 <script>
 import { PassThrough } from 'stream';
+<<<<<<< HEAD
 export default {
 
+=======
+import FavoriteHistory from "../components/FavoriteHistory";
+
+
+export default {
+  components: {
+    FavoriteHistory
+  },
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
   async mounted() {
     this.axios.get(this.image, {withCredentials:false}).then((i) => {
       this.image_load = true;
     });
+<<<<<<< HEAD
+=======
+    // this.history = await this.axios.get(
+    //   "http://localhost:80/user/history",
+    //   {
+    //     params:{},
+    //   }
+    // );
+    // this.favorites = await this.axios.get(
+    //   "http://localhost:80/user/favorites",
+    //   {
+    //     params:{},
+    //   }
+    // );
+    // let history_ids = [];
+    // for (let i = 0; i < this.history.data.length; i++) {
+    //   history_ids.push(this.history.data[i].recipe_id);
+    // }
+    // let favorites_ids = [];
+    // for (let i = 0; i < this.favorites.data.length; i++) {
+    //   favorites_ids.push(this.favorites.data[i].recipe_id);
+    // }
+    // this.favorite = favorites_ids.includes(this.id);
+    // this.watched = history_ids.includes(this.id);
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 
   },
   data() {
@@ -80,6 +120,10 @@ export default {
       type: Boolean,
       required: true
     },
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
     aggregateLikes: {
       type: Number,
       required: false,
@@ -112,6 +156,10 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .all-details{
   width: 30%;
   vertical-align: top;
@@ -121,6 +169,10 @@ export default {
   width: 20%;
   height: 20%;  
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .recipe-footer .recipe-title{  
   font-size: x-large;
   font-family: Copperplate, Papyrus, fantasy;
@@ -128,6 +180,11 @@ export default {
   min-width: 100px;
   min-height: 100px;
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .recipe-details{
   display: inline-block;
   margin-bottom: 5px;
@@ -135,6 +192,10 @@ export default {
   font-family: 'Times New Roman', serif;
   font-size: large;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .recipe-preview {  
   display: inline-block;
   width: 20%;
@@ -142,6 +203,10 @@ export default {
   position: relative;
   margin: 10px 10px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .recipe-image{
   max-width: 2250%;
   height: auto;
@@ -154,21 +219,34 @@ export default {
   border-collapse: inherit;
   
 }
+<<<<<<< HEAD
 .recipe-image:hover{
   transform: scale(1.05);
 }
+=======
+
+.recipe-image:hover{
+  transform: scale(1.05);
+}
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .details-image{
   width: 8.5%;
   height: 8.5%;
   margin-left: -15px;
   margin-right: 10px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .diet-image{
   width: 17.5%;
   height: 17.5%;
   margin-left: -25px;
   margin-right: 60px;
 }
+<<<<<<< HEAD
 .favorites{
   margin-left: -25px;
 }
@@ -182,3 +260,22 @@ export default {
   width: 205px;
 }
 </style>
+=======
+
+.favorites{
+  margin-left: -25px;
+}
+
+.watched{
+  margin-left: -25px;
+}
+
+.images{
+  min-height:50px;
+}
+
+.favorite-button{
+  width: 205px;
+}
+</style>
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363

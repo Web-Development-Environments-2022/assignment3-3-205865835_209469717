@@ -2,8 +2,12 @@
   <div>
     
     <b-container>
+<<<<<<< HEAD
         <h1>Your Recipes:</h1>
         <h1 v-if="this.recipes.length == 0" style="font-size: 150%;">You haven't added any recipes yet</h1>
+=======
+        <h1>Your Recipies:</h1>
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
         <div>
             <MyRecipePreview class="recipePreview" v-for="r in this.recipes" :key="r.recipe_id"
             v-bind:id="r.recipe_id"
@@ -56,6 +60,10 @@ export default {
         
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 </script>
 
 <style>
@@ -65,4 +73,8 @@ export default {
   border: 3px solid rgb(230, 230, 226);
   border-radius: 10%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 </style>

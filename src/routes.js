@@ -67,6 +67,16 @@ const routes = [
     name: "notFound",
     component: NotFound,
   },
+  {
+    path: "/about",
+    name: "about",
+    component: ()=> import("./pages/About")
+  },
+  {
+    path: "/myrecipes",
+    name: "myrecipes",
+    component: ()=> import("./pages/MyRecipes")
+  },
 ];
 
 export default routes;

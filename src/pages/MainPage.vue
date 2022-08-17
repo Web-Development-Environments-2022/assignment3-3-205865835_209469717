@@ -135,6 +135,10 @@ export default {
   
   
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .Recent_Recipes{
   // border:1px solid #000;
   display:inline-block;
@@ -204,8 +208,18 @@ export default {
     }
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .align_pages{
       display: flex;
     justify-content: space-between;
 }
+<<<<<<< HEAD
 </style>
+=======
+
+</style>
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363

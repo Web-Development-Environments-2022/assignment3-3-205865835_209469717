@@ -144,12 +144,15 @@ export default {
         servings,
         title
       };
+<<<<<<< HEAD
       this.fullIngredients = _recipe.extendedIngredients;
       let _extendedIngredients = [];
       for (let i =0; i < _recipe.extendedIngredients.length; i++){
         _extendedIngredients.push(_recipe.extendedIngredients[i].original)
       }
       _recipe.extendedIngredients = _extendedIngredients;
+=======
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
       this.recipe = _recipe;
     } catch (error) {
       console.log(error);

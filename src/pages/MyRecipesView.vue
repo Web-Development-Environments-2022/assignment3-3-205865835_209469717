@@ -54,9 +54,19 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import FavoriteHistory from "../components/FavoriteHistory";
 export default {
   components: {
+=======
+
+import FavoriteHistory from "../components/FavoriteHistory";
+
+
+export default {
+  components: {
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
   },
   data() {
     return {
@@ -71,6 +81,10 @@ export default {
     try {
       let response;
       // response = this.$route.params.response;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
       try {
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
@@ -80,6 +94,10 @@ export default {
             // params: { id: this.$route.params.recipeId }
           }
         );
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
         // console.log("response.status", response.status);
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
@@ -104,6 +122,10 @@ export default {
       }
       
       console.log(this.recipe.ingredients)
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
       let inFavorites = false; 
       let watched = false; 
       let extendedIngredients = this.recipe.ingredients.split("\n");
@@ -117,8 +139,17 @@ export default {
       let vegetarian = this.recipe.vegetarian
       let servings = this.recipe.servings
       let title = this.recipe.title
+<<<<<<< HEAD
       let _instructions = instructions.split("\n");
       console.log(_instructions)
+=======
+
+
+
+      let _instructions = instructions.split("\n");
+      console.log(_instructions)
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
       // console.log(id,
       //   instructions,
       //   _instructions,
@@ -134,6 +165,10 @@ export default {
       //   watched,
       //   servings,
       //   title)
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
       let _recipe = {
         id,
         instructions,
@@ -162,12 +197,21 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .wrapper {
     width: 1000px;
     /* border: 5px solid black; */
@@ -188,6 +232,10 @@ export default {
       margin-top: 175px;
       width: 205px;
       margin-left: 30px;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 }
 .title-text{
   font-weight: bold;
@@ -222,16 +270,33 @@ export default {
   font-size: large;
 }
 /* .recipe-header{
+<<<<<<< HEAD
 } */
+=======
+
+} */
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 ol {
   list-style-type: none;
   counter-reset: elementcounter;
   padding-left: 0;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
 .step-li:before {
   content: "Step " counter(elementcounter) ". ";
   counter-increment: elementcounter;
   font-weight: bold;
   
 }
+<<<<<<< HEAD
 </style>
+=======
+
+
+</style>
+
+>>>>>>> b3e1664609069b635ee25f84daaaca13ac8c1363
